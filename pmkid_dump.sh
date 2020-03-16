@@ -34,7 +34,6 @@ ssidfunc() {
 nohup hcxdumptool -i wlan0mon -o hashdump.pcapng & 2>&1>/dev/null
 prc=$!
 
-
 while true; do
 	clear
 	printf "$GREEN =-=-=-Collection PMKID from handshake-=-=-=\e[m\n"
