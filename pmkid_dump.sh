@@ -9,6 +9,7 @@ RED='\033[00;31m'
 YELLOW='\033[00;33m'
 BLUE='\033[00;34m'
 CYAN='\033[00;36m'
+EDOL='\e[m'
 
 ctrl_c() {
 	kill $prc
@@ -26,8 +27,8 @@ ssidfunc() {
 		text="SSID for PMKID $ssid: $ssout"
 		length=${#text}
 		line=$(for a in $(seq 1 $length); do echo -n '-'; done)
-		echo -e "$YELLOW SSID for PMKID $RED$ssid\e[m: $BLUE$ssout\e[m"
-		echo -e "$CYAN $line\e[m"
+		echo -e "$YELLOW SSID for PMKID $RED$ssid$EDOL: $BLUE$ssout$EDOL"
+		echo -e "$CYAN $line$EDOL"
 	done
 }
 	
@@ -39,7 +40,7 @@ while true; do
 	printf "$GREEN =-=-=-Collection PMKID from handshake-=-=-=\e[m\n"
 	hcxpcaptool -z hashes.txt hashdump.pcapng 2>&1>/dev/null
 	ssidfunc --color=always | tee res.txt
-	printf "\n$RED Ctrl+C to exit\e[m\n"
+	printf "\n$RED Ctrl+C to exit$EDOL\n"
 	sleep 3
 	printf "" > hashes.txt 2>&1>/dev/null
 done
